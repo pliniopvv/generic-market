@@ -1,5 +1,5 @@
-import { User } from "src/users/users.entity";
-export const entities = [User]
+import { User } from 'src/users/users.entity';
+export const entities = [User];
 
 // export const dataSourceConfig = {
 //   type: 'mysql',

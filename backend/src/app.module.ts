@@ -7,7 +7,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceConfig } from './db/database.provider';
 
 @Module({
-  imports: [AuthModule, UsersModule, TypeOrmModule.forRoot(dataSourceConfig as any)],
+  imports: [
+    AuthModule,
+    UsersModule,
+    TypeOrmModule.forRoot(dataSourceConfig as any),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
