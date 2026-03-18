@@ -11,7 +11,7 @@ export class UsersService {
   ) {}
 
   save(user: User) {
-    return this.repository.save(user);
+    return this.repository.save(user).then(({ password, ...obj }) => obj);
   }
 
   find() {

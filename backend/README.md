@@ -1,5 +1,5 @@
 Por fazer:
 
-- [ ] Adicionar criptorafia da senha.
-- [ ] Configurar UserService no Fastcode.
+- [x] Adicionar criptorafia da senha do Usuário.
+- [x] Configurar UserService no Fastcode.
 - [ ] 
