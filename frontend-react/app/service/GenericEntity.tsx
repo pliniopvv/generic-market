@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class GenericEntity {
 
-    private id: number;
+    id: number;
     private url: string;
 
     constructor(cmp: any) {
