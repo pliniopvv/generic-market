@@ -2,6 +2,7 @@ import { Component, Fragment } from "react";
 import type { Route } from "../+types/root";
 import Menu from "~/shared/menu";
 import { Outlet } from "react-router";
+import FooterComponent from "~/shared/footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -17,6 +18,7 @@ export default class ShopRoute extends Component {
             <Fragment>
                 <Menu />
                 <Outlet />
+                <FooterComponent />
             </Fragment>
         )
     }
