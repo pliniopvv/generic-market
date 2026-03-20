@@ -1,9 +1,9 @@
 import { Component } from "react";
 
-export default class AdminRoute extends Component {
+export default class AdminPage extends Component {
     render() {
-        return (
-            <p>Rota Admin</p>
+        return(
+            <p>Admin Page Ok!</p>
         )
     }
 }

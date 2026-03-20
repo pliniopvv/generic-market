@@ -11,8 +11,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { User } from './users/users.entity';
 import { AuthService } from './auth/auth.service';
 
-interface UserExport {
-  user: User;
+interface TokenExport {
+  access_token: string;
 }
 
 @Controller()
@@ -29,8 +29,8 @@ export class AppController {
 
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
-  login(@Request() req: UserExport): User {
-    return req.user;
+  login(@Request() req, @Body() user: User): TokenExport {
+    return this.authService.login(user);
   }
 
   @Post('auth/register')
