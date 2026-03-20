@@ -20,6 +20,9 @@ importers:
       daisyui:
         specifier: ^5.5.19
         version: 5.5.19
+      dotenv:
+        specifier: ^17.3.1
+        version: 17.3.1
       isbot:
         specifier: ^5.1.31
         version: 5.1.35
@@ -1227,6 +1230,10 @@ packages:
   diff@1.0.8:
     resolution: {integrity: sha512-1zEb73vemXFpUmfh3fsta4YHz3lwebxXvaWmPbFv9apujQBWDnkrPDLXLQs1gZo4RCWMDsT89r0Pf/z8/02TGA==}
     engines: {node: '>=0.3.1'}
+
+  dotenv@17.3.1:
+    resolution: {integrity: sha512-IO8C/dzEb6O3F9/twg6ZLXz164a2fhTnEWb95H23Dm4OuN+92NmEAlTrupP9VW6Jm3sO26tQlqyvyi4CsnY9GA==}
+    engines: {node: '>=12'}
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -4142,6 +4149,8 @@ snapshots:
   detect-libc@2.1.2: {}
 
   diff@1.0.8: {}
+
+  dotenv@17.3.1: {}
 
   dunder-proto@1.0.1:
     dependencies:

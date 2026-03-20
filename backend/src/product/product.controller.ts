@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  HttpCode,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
@@ -23,6 +24,7 @@ export class ProductController {
   }
 
   @Get()
+  @HttpCode(200)
   findAll() {
     return this.productService.findAll();
   }
