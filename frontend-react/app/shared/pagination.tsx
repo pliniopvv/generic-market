@@ -12,19 +12,11 @@ export default class Pagination extends Component<
 > {
   constructor(props: any) {
     super(props);
-    // this.setState({
-    //   filter: props.filter,
-    // });
-  }
-
-  componentDidMount(): void {
-    const { filter } = this.props;
-    this.setState({ filter });
   }
 
   render() {
     const { filter, update } = this.props;
-    const totalPages = Math.round(filter.totalEntitys / filter.pageSize);
+    const totalPages = Math.ceil(filter.totalEntitys / filter.pageSize);
     const pages = [];
     for (let i = 0; i < totalPages; i++) pages.push(i);
     return (

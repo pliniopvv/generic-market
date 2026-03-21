@@ -16,12 +16,10 @@ export default class ListCardProduct extends Component {
     const list = (await entity.list()).map((x, i) => (
       <CardProduct key={i} product={x} />
     ));
-
-    const total = this.state.list.length;
     const filter = new Filter();
 
     filter.page = 1;
-    filter.totalEntitys = total;
+    filter.totalEntitys = list.length;
 
     const slice = list.slice(
       (filter.page - 1) * filter.pageSize,
