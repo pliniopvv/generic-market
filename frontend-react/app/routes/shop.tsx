@@ -1,7 +1,7 @@
 import { Component, Fragment } from "react";
 import type { Route } from "../+types/root";
 import Carrousel from "~/shared/carrousel";
-import ListCardProduct from "~/shared/list-card-product";
+import ListCardProduct from "~/shared/product/list-card-product";
 
 export function meta({}: Route.MetaArgs) {
   return [

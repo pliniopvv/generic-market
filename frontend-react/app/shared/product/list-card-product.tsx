@@ -1,8 +1,7 @@
 import { Component, Fragment } from "react";
-import CardProduct from "./card-product";
+import CardProduct from "../card-product";
 import Filter from "~/model/Filter";
-import Pagination from "./pagination";
-import { ProductMock } from "~/model/Product.mock";
+import Pagination from "../pagination";
 import ProductEntity from "~/model/Product.entity";
 
 export default class ListCardProduct extends Component {

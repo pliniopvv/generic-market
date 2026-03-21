@@ -1,8 +1,10 @@
 import { Component } from "react";
+import { toast } from "react-toastify";
 import type ProductEntity from "~/model/Product.entity";
 
 interface Props {
   list: ProductEntity[];
+  onExclude: Function;
 }
 
 export default class TableProduct extends Component<Props, {}> {
@@ -22,6 +24,16 @@ export default class TableProduct extends Component<Props, {}> {
   ): void {
     if (this.props.list.length != this.state.list.length)
       this.setState({ list: this.props.list });
+  }
+
+  async onExclude(entity) {
+    const { onExclude } = this.props;
+    const result = await toast.promise(entity.delete(), {
+      pending: "Excluíndo ...",
+      error: "Erro ao excluir",
+      success: "Excluído com sucesso!",
+    });
+    if (result && onExclude) onExclude(entity);
   }
 
   render() {
@@ -68,7 +80,12 @@ export default class TableProduct extends Component<Props, {}> {
                   <td className="text-wrap">{x.description}</td>
                   <td>R$ {x.price.toFixed(2)}</td>
                   <th>
-                    <button className="btn btn-error btn-xs">Excluir</button>
+                    <button
+                      className="btn btn-error btn-xs"
+                      onClick={() => this.onExclude(x)}
+                    >
+                      Excluir
+                    </button>
                   </th>
                 </tr>
               );

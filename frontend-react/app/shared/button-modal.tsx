@@ -18,9 +18,11 @@ export default class ModalButton extends Component<
     const { label, children } = this.props;
     return (
       <Fragment>
-        <button className="btn btn-success m-2" onClick={() => this.toggle()}>
+        <div className="row text-end">
+          <button className="btn btn-success m-2" onClick={() => this.toggle()}>
           {label}
         </button>
+        </div>
         <dialog className="modal" ref={ref}>
           <div className="modal-box">{children}</div>
           <form method="dialog" className="modal-backdrop">

@@ -1,61 +1,50 @@
 import { Component } from "react";
 import type { ChangeEvent, FormEvent } from "react";
-import axios from "axios";
+import ProductEntity from "~/model/Product.entity";
+import { toast } from "react-toastify";
 
 interface ProductFormState {
-  name: string;
-  description: string;
-  fileImage: File | null;
-  price: number;
-  visible: boolean;
+  product: ProductEntity;
 }
 
-export default class FormProduct extends Component<{}, ProductFormState> {
-  constructor(props: {}) {
+export default class FormProduct extends Component<
+  { onClose: Function },
+  ProductFormState
+> {
+  state = {
+    product: new ProductEntity(),
+  };
+
+  constructor(props) {
     super(props);
-    this.state = {
-      name: "",
-      description: "",
-      fileImage: null,
-      price: 0,
-      visible: true,
-    };
   }
 
-  handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type, checked } = e.target as HTMLInputElement;
-    this.setState((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
+  setProduct(cmp) {
+    this.setState({ product: Object.assign(this.state.product, cmp) });
+  }
 
   handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      this.setState({ fileImage: e.target.files[0] });
+      this.setState({
+        product: Object.assign(this.state.product, {
+          fileImage: e.target.files[0],
+        }),
+      });
     }
   };
 
   handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", this.state.name);
-    formData.append("description", this.state.description);
-    formData.append("price", String(this.state.price));
-    formData.append("visible", String(this.state.visible));
-    if (this.state.fileImage) {
-      formData.append("fileImage", this.state.fileImage);
-    }
+    const { product } = this.state;
+    const { onClose } = this.props;
+    const result = await toast.promise(product.save(), {
+      pending: "Salvando ...",
+      error: "Falha em salvar produto!",
+      success: "Produto salvo com sucesso!",
+    });
 
-    try {
-      const response = await axios.post("/products", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-      console.log("Produto salvo:", response.data);
-    } catch (error) {
-      console.error("Erro ao salvar produto:", error);
-    }
+    if (result && onClose) onClose(product);
   };
 
   render() {
@@ -66,8 +55,8 @@ export default class FormProduct extends Component<{}, ProductFormState> {
           <input
             type="text"
             name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
+            value={this.state.product.name}
+            onChange={(e) => this.setProduct({ name: e.target.value })}
             className="input input-bordered w-full"
             placeholder="Digite o nome do produto"
             required
@@ -75,8 +64,8 @@ export default class FormProduct extends Component<{}, ProductFormState> {
 
           <textarea
             name="description"
-            value={this.state.description}
-            onChange={this.handleChange}
+            value={this.state.product.description}
+            onChange={(e) => this.setProduct({ description: e.target.value })}
             className="textarea textarea-bordered w-full"
             placeholder="Digite a descrição"
             required
@@ -92,8 +81,8 @@ export default class FormProduct extends Component<{}, ProductFormState> {
           <input
             type="number"
             name="price"
-            value={this.state.price}
-            onChange={this.handleChange}
+            value={this.state.product.price}
+            onChange={(e) => this.setProduct({ price: e.target.value })}
             className="input input-bordered w-full"
             placeholder="0.00"
             step="0.01"
@@ -105,8 +94,8 @@ export default class FormProduct extends Component<{}, ProductFormState> {
             <input
               type="checkbox"
               name="visible"
-              checked={this.state.visible}
-              onChange={this.handleChange}
+              checked={this.state.product.visible}
+              onChange={(e) => this.setProduct({ visible: e.target.value })}
               className="checkbox checkbox-primary"
             />
           </label>

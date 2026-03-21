@@ -29,7 +29,7 @@ class AdminRoute extends Component<{ navigate: any }> {
     );
     if (result) {
       const { data } = result;
-      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("access_token", data.access_token);
       navigate("/admin");
     }
   }
