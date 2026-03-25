@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { toast } from "react-toastify";
 import AuthService from "~/service/AuthService";
-import withNavigate from "~/shared/withNavigator";
+import withNavigate from "~/shared/withNavigate";
 
 class AdminRoute extends Component<{ navigate: any }> {
   state = {

@@ -5,6 +5,7 @@ export default [
     index("routes/shop.tsx"),
     route("/admin", "routes/private.tsx", [route("", "routes/admin.tsx")]),
     route("/login", "routes/login.tsx"),
+    route("/cart", "routes/cart.tsx"),
     route("*", "routes/not-found.tsx"),
   ]),
 ] satisfies RouteConfig;

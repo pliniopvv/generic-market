@@ -5,16 +5,13 @@ import ListCardProduct from "~/shared/product/list-card-product";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "E-Commerce v1.0" },
+    { name: "GenericMarket v1.0", content: "Bem vindo ao E-commerce!" },
   ];
 }
 
-
 export default class ShopRoute extends Component {
-    render() {
-        return (
-              <ListCardProduct />
-        )
-    }
+  render() {
+    return <ListCardProduct />;
+  }
 }
