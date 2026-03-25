@@ -1,4 +1,4 @@
-import { Component, type ErrorInfo } from "react";
+import { Component, createRef, type ErrorInfo } from "react";
 import { toast } from "react-toastify";
 import Filter from "~/model/Filter";
 import ProductEntity from "~/model/Product.entity";
@@ -8,9 +8,15 @@ import FormProduct from "~/shared/product/form-product";
 import TableProduct from "~/shared/product/table-product";
 
 export default class AdminPage extends Component {
+  ref = {
+    modal: createRef<ModalButton>(),
+    form: createRef<FormProduct>(),
+  };
+
   state = {
     filter: new Filter(),
     list: [],
+    selected: null,
   };
 
   async componentDidMount(): Promise<void> {
@@ -38,14 +44,24 @@ export default class AdminPage extends Component {
     this.setState({ list, filter });
   }
 
+  edit(product) {
+    this.setState({ selected: product }, () => {
+      this.ref.modal.current.toggle();
+    });
+  }
+
   render() {
-    const { list, filter } = this.state;
+    const { list, filter, selected } = this.state;
     return (
       <div className="text-black">
-        <ModalButton label="Adicionar Produtos">
-          <FormProduct onClose={() => this.update()} />
+        <ModalButton label="Adicionar Produtos" ref={this.ref.modal}>
+          <FormProduct onClose={() => this.update()} selected={selected} />
         </ModalButton>
-        <TableProduct list={list} onExclude={() => this.update()} />
+        <TableProduct
+          list={list}
+          onExclude={() => this.update()}
+          onEdit={(x: any) => this.edit(x)}
+        />
         <div className="text-end m-5">
           <Pagination filter={filter} update={(e) => this.query(e)} />
         </div>

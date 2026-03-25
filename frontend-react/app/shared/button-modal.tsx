@@ -20,8 +20,8 @@ export default class ModalButton extends Component<
       <Fragment>
         <div className="row text-end">
           <button className="btn btn-success m-2" onClick={() => this.toggle()}>
-          {label}
-        </button>
+            {label}
+          </button>
         </div>
         <dialog className="modal" ref={ref}>
           <div className="modal-box">{children}</div>

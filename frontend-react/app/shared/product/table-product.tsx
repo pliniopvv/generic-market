@@ -5,7 +5,8 @@ import type ProductEntity from "~/model/Product.entity";
 
 interface Props {
   list: ProductEntity[];
-  onExclude: Function;
+  onExclude?: Function;
+  onEdit?: Function;
 }
 
 export default class TableProduct extends Component<Props, {}> {
@@ -24,7 +25,7 @@ export default class TableProduct extends Component<Props, {}> {
   }
 
   render() {
-    const { list } = this.props;
+    const { list, onExclude, onEdit } = this.props;
     return (
       <div className="overflow-x-auto">
         <table className="table">
@@ -67,12 +68,22 @@ export default class TableProduct extends Component<Props, {}> {
                   <td className="text-wrap">{x.description}</td>
                   <td>R$ {x.price.toFixed(2)}</td>
                   <th>
-                    <button
-                      className="btn btn-error btn-xs"
-                      onClick={() => this.onExclude(x)}
-                    >
-                      Excluir
-                    </button>
+                    {onExclude && (
+                      <button
+                        className="btn btn-error btn-xs"
+                        onClick={() => this.onExclude(x)}
+                      >
+                        Excluir
+                      </button>
+                    )}
+                    {onEdit && (
+                      <button
+                        className="btn btn-success btn-xs mx-2"
+                        onClick={() => onEdit(x)}
+                      >
+                        Editar
+                      </button>
+                    )}
                   </th>
                 </tr>
               );

@@ -2,13 +2,14 @@ import { Component } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import ProductEntity from "~/model/Product.entity";
 import { toast } from "react-toastify";
+import { isEqual } from "lodash";
 
 interface ProductFormState {
   product: ProductEntity;
 }
 
 export default class FormProduct extends Component<
-  { onClose: Function },
+  { onClose: Function; selected: any },
   ProductFormState
 > {
   state = {
@@ -17,6 +18,18 @@ export default class FormProduct extends Component<
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<{ onClose: Function; selected: any }>,
+    prevState: Readonly<ProductFormState>,
+    snapshot?: any,
+  ): void {
+    const { selected } = this.props;
+    
+    if (selected)
+      if (!isEqual(selected, this.state.product))
+        this.setState({ product: selected });
   }
 
   setProduct(cmp) {
