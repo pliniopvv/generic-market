@@ -13,9 +13,9 @@ export default class ListCardProduct extends Component {
 
   async componentDidMount(): Promise<void> {
     const entity = new ProductEntity();
-    const list = (await entity.list()).map((x, i) => (
-      <CardProduct key={i} product={x} />
-    ));
+    const list = (await entity.list())
+      .filter((x) => x.visible)
+      .map((x, i) => <CardProduct key={i} product={x} />);
     const filter = new Filter();
 
     filter.page = 1;

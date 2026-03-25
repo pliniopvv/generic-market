@@ -1,4 +1,5 @@
 import axios from "axios";
+import type Filter from "~/model/Filter";
 
 export default class GenericEntity {
   id: number;
@@ -9,10 +10,20 @@ export default class GenericEntity {
     if (!this.url) throw new Error("url required");
   }
 
-  async list() {
-    const { status, data } = await axios.get(`${this.url}`);
+  async list(filter?: Filter) {
+    if (!filter) {
+      const { status, data } = await axios.get(`${this.url}`);
+      if (200 > status || status > 299) throw new Error(`status ${status}`);
+      return data.map((e) => new GenericEntity({ url: this.url, ...e }));
+    }
+
+    const { status, data } = await axios.get(
+      `${this.url}?page=${filter.page}&size=${filter.pageSize}`,
+    );
     if (200 > status || status > 299) throw new Error(`status ${status}`);
-    return data.map((e) => new GenericEntity({ url: this.url, ...e }));
+    const list = data.data;
+    data.data = undefined;
+    return list.map((e) => new GenericEntity({ url: this.url, _: data, ...e }));
   }
 
   async load() {

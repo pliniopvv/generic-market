@@ -14,8 +14,21 @@ export class ProductService {
     return this.repository.save(model);
   }
 
-  findAll() {
-    return this.repository.find();
+  async findAll(page?: number, size?: number) {
+    if (size && page) {
+      const [data, total] = await this.repository.findAndCount({
+        skip: (page - 1) * size,
+        take: size,
+        order: { id: 'ASC' },
+      });
+      return {
+        data,
+        total,
+        page,
+        size,
+        totalPages: Math.ceil(total / size),
+      };
+    } else return this.repository.find();
   }
 
   findOne(id: number) {

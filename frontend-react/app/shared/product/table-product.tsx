@@ -1,3 +1,4 @@
+import { isEqual } from "lodash";
 import { Component } from "react";
 import { toast } from "react-toastify";
 import type ProductEntity from "~/model/Product.entity";
@@ -12,20 +13,6 @@ export default class TableProduct extends Component<Props, {}> {
     list: [],
   };
 
-  componentDidMount(): void {
-    const { list } = this.props;
-    this.setState({ list });
-  }
-
-  componentDidUpdate(
-    prevProps: Readonly<Props>,
-    prevState: Readonly<{}>,
-    snapshot?: any,
-  ): void {
-    if (this.props.list.length != this.state.list.length)
-      this.setState({ list: this.props.list });
-  }
-
   async onExclude(entity) {
     const { onExclude } = this.props;
     const result = await toast.promise(entity.delete(), {
@@ -37,7 +24,7 @@ export default class TableProduct extends Component<Props, {}> {
   }
 
   render() {
-    const { list } = this.state;
+    const { list } = this.props;
     return (
       <div className="overflow-x-auto">
         <table className="table">

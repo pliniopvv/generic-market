@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   HttpCode,
+  Query,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { Product } from './entities/product.entity';
@@ -25,8 +26,10 @@ export class ProductController {
 
   @Get()
   @HttpCode(200)
-  findAll() {
-    return this.productService.findAll();
+  findAll(@Query('page') page?: number, @Query('size') size?: number) {
+    if (!page && !size) return this.productService.findAll();
+
+    return this.productService.findAll(page, size);
   }
 
   @Get(':id')
