@@ -3,14 +3,16 @@ A fazeres:
 - [x] Criar model ProductEntity;
 - [x] Criar endpoint product;
 - [x] Aplicar model no cardProduct;
-- [ ] Obter Product do endpoint;
-- [ ] Criar formulário para cadastrar Product;
-- [ ] Funcionar botão de comprar;
+- [x] Obter Product do endpoint;
+- [x] Criar formulário para cadastrar Product;
+- [x] Funcionar botão de comprar;
+- [ ] Implementar service de pagamento;
+- [ ] Implementar gateway de pagamento abacate no backend;
 ---
 Área Administrativa
-- [ ] Criar model user;
-- [ ] Criar tela de login;
-- [ ] Criar guards logado usuário;
-- [ ] Criar área de adição/edição de produtos;
-- [ ] Criar carrinho de compras;
+- [x] Criar model user;
+- [x] Criar tela de login;
+- [x] Criar guards logado usuário;
+- [x] Criar área de adição/edição de produtos;
+- [x] Criar carrinho de compras;
 - [ ] Formatar Footer;

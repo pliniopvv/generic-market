@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dataSourceConfig } from './db/database.provider';
 import { ProductModule } from './product/product.module';
+import { CheckoutModule } from './checkout/checkout.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ProductModule } from './product/product.module';
     UsersModule,
     TypeOrmModule.forRoot(dataSourceConfig as any),
     ProductModule,
+    CheckoutModule,
   ],
   controllers: [AppController],
   providers: [AppService],

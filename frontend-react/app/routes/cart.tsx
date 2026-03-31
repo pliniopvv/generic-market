@@ -1,5 +1,7 @@
 import { Component, Fragment, type Context } from "react";
 import { CartContext } from "~/context/CartContext";
+import AbacatePayService from "~/model/card/AbacatePayService";
+import GenericPayment, { type Card } from "~/model/card/GenericPayment";
 import ModalButton from "~/shared/button-modal";
 import ListCart from "~/shared/cart/cart-list";
 import FormCart from "~/shared/cart/form-cart";
@@ -7,9 +9,11 @@ import FormCart from "~/shared/cart/form-cart";
 export default class CartPage extends Component {
   static contextType?: Context<any> = CartContext;
 
-  pay(data: any) {
+  pay(data: Card) {
     const { cart } = this.context as any;
-    debugger;
+    const payment = new GenericPayment(new AbacatePayService());
+
+    payment.payWithCard(cart, data);
   }
 
   render() {
