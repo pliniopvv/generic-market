@@ -5,8 +5,10 @@ import axios from "axios";
 export default class AbacatePayService implements PaymentGateway {
   private readonly client: AxiosInstance;
   private payload: any = {};
+  TOKEN: string;
 
-  constructor() {
+  constructor(API_KEY: string) {
+    this.TOKEN = API_KEY;
     this.client = axios.create({
       baseURL: "https://api.abacatepay.com/v1", // endpoint fictício
       headers: {

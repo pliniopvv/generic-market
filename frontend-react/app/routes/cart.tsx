@@ -1,7 +1,8 @@
+import axios from "axios";
 import { Component, Fragment, type Context } from "react";
 import { CartContext } from "~/context/CartContext";
-import AbacatePayService from "~/model/card/AbacatePayService";
-import GenericPayment, { type Card } from "~/model/card/GenericPayment";
+import { BASE_API } from "~/environment";
+import type { Card } from "~/model/card/GenericPayment";
 import ModalButton from "~/shared/button-modal";
 import ListCart from "~/shared/cart/cart-list";
 import FormCart from "~/shared/cart/form-cart";
@@ -9,11 +10,10 @@ import FormCart from "~/shared/cart/form-cart";
 export default class CartPage extends Component {
   static contextType?: Context<any> = CartContext;
 
-  pay(data: Card) {
+  async pay(card: Card) {
     const { cart } = this.context as any;
-    const payment = new GenericPayment(new AbacatePayService());
-
-    payment.payWithCard(cart, data);
+    const { status, data } = await axios.post(`${BASE_API}/checkout`, { cart, card });
+    console.log(status, data);
   }
 
   render() {

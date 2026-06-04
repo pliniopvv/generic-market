@@ -18,6 +18,8 @@ export interface Slip {
 }
 
 export interface PaymentGateway {
+  TOKEN: string;
+
   pay(cart: Item[]);
   pay(cart: Item[]);
   withCard(info: Card);
@@ -26,7 +28,7 @@ export interface PaymentGateway {
 }
 
 export default class GenericPayment {
-  constructor(private readonly service: PaymentGateway) {}
+  constructor(private readonly service: PaymentGateway) { }
 
   payWithCard(cart: Item[], info: Card) {
     return this.service.pay(cart).withCard(info).process();

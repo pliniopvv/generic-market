@@ -1,7 +1,7 @@
 import { Product } from 'src/product/entities/product.entity';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-enum Method {
+export enum Method {
   PIX,
   CARD,
   SLIP,
